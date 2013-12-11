@@ -121,7 +121,10 @@ public class JSONArray {
             switch (x.nextClean()) {
             case ';':
             case ',':
-                if (x.nextClean() == ']') {
+            	char nextClean = x.nextClean();
+                if (nextClean == 0) {
+                	throw x.syntaxError("JSONArray text has a trailing ','");
+                } else if (nextClean == ']') {
                     return;
                 }
                 x.back();
